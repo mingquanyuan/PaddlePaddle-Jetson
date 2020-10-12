@@ -13,6 +13,13 @@ sudo pip3 install numpy protobuf wheel setuptools virtualenv
 ulimit -n 2048 #最大的文件打开数量
 ```
 
+## install NCCL
+```
+git clone https://github.com/NVIDIA/nccl.git
+make -j4
+make install
+```
+
 ## create virtual environment
 ```
 mkdir my-agx && cd my-agx
