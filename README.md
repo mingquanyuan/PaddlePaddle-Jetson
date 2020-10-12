@@ -42,7 +42,7 @@ cmake ..  -DCMAKE_BUILD_TYPE=Release \
            -DPY_VERSION=3 \
            -DON_INFER=ON \
            -DWITH_XBYAK=OFF \
-	            -DWITH_NV_JETSON=ON \
+	   -DWITH_NV_JETSON=ON \
            -DWITH_ARM=ON
  make TARGET=ARMV8 -j8  # agx-xavier has 8 cores, to accelerate compile process we can pass parameter of -j8. Be patient and this process might take a few hours
 ```
