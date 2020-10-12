@@ -16,6 +16,7 @@ ulimit -n 2048 #最大的文件打开数量
 ## install NCCL
 ```
 git clone https://github.com/NVIDIA/nccl.git
+cd nccl
 make -j8
 make install
 ```
