@@ -40,19 +40,19 @@ git tag  # find the version to compile, I used v2.0.0-beta0
 git checkout v2.0.0-beta0
 pip3 install -r python/requirements.txt
 mkdir build && cd build
-cmake ..  -DCMAKE_BUILD_TYPE=Release \
-           -DWITH_CONTRIB=OFF \
-           -DWITH_MKL=OFF \
-           -DWITH_MKLDNN=OFF \
-           -DWITH_TESTING=OFF \
-           -DWITH_GPU=OFF \
-           -DWITH_PYTHON=ON \
-           -DPY_VERSION=3 \
-           -DON_INFER=ON \
-           -DWITH_XBYAK=OFF \
-	   -DWITH_NV_JETSON=ON \
-           -DWITH_ARM=ON
- make TARGET=ARMV8 -j8  # agx-xavier has 8 cores, to accelerate compile process we can pass parameter of -j8. Be patient and this process might take a few hours
+cmake .. \
+          -DWITH_CONTRIB=OFF \
+          -DWITH_MKL=OFF  \
+          -DWITH_MKLDNN=OFF \
+          -DWITH_TESTING=OFF \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DON_INFER=ON \
+          -DWITH_PYTHON=ON \
+          -DWITH_XBYAK=OFF  \
+          -DWITH_NV_JETSON=ON \
+          -DPY_VERSION=3 \
+          -DCUDA_ARCH_NAME=Auto
+ make TARGET=ARMV8 -j4  # agx-xavier has 8 cores, to accelerate compile process we can pass parameter of -j8. Be patient and this process might take a few hours
  make inference_lib_dist
  pip install -U python/dist/*.whl  #还是在build文件夹
 ```
