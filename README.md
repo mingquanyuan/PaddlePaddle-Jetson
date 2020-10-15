@@ -70,6 +70,9 @@ make inference_lib_dist
 pip install -U python/dist/*.whl  #还是在build文件夹
 ```
 
+## test demo
+- [Object detection with YOLOv3](https://github.com/PaddlePaddle/Paddle-Inference-Demo/tree/master/python/yolov3)
+- [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR/blob/develop/doc/doc_ch/models_list.md)
 
 ## References
 - https://my.oschina.net/u/4375893/blog/4369069
