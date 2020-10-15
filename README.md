@@ -1,8 +1,9 @@
 # PaddlePaddle-Jetson
-Source compile PaddlePaddle framework for NVIDIA jetson devices
+Source compile PaddlePaddle framework for NVIDIA jetson devices. 
+Jetson AGX Xavier is used to create this instruction.
 
 ## prerequisite
-- JetPack 4.3 (JetPack 4.4 comes with Cuda 10.2 and cuDNN 8, which might not be compatbile for PaddlePaddle at this moment.)
+- JetPack 4.3 (JetPack 4.4 comes with Cuda 10.2 and cuDNN 8, which might not be compatbile for PaddlePaddle.)
 
 
 ## install dependencies
@@ -23,7 +24,7 @@ ulimit -n 4096 #最大的文件打开数量
 ```
 git clone https://github.com/NVIDIA/nccl.git
 cd nccl
-make -j8
+make -j4
 sudo make install
 ```
 
@@ -35,14 +36,13 @@ virtual ~IPluginFactory() {};
 
 ## create virtual environment
 ```
-mkdir my-agx && cd my-agx
+mkdir my-agx-project && cd my-agx-project
 python3 -m venv name-of-env 
 # opencv is installed with JetPack on jetson devices, you only need to link it to your virtual environment to use it
 # path may vary and need to be changed if necessary
 # ln -s /usr/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so（本机cv2） path-to-venv/name-of-venv/lib/python3.6/site-packages/cv2.cpython-36m-aarch64-linux-gnu.so 
 source name-of-env/bin/activate
-pip3 install cython wheel numpy
-pip3 install scikit-build
+pip3 install cython wheel numpy scikit-build
 ```
 
 ## compile
@@ -67,12 +67,12 @@ cmake .. \
           -DCUDA_ARCH_NAME=Auto
 make TARGET=ARMV8 -j4  # agx-xavier has 8 cores, to accelerate compile process we can pass parameter of -j8. Be patient and this process might take a few hours
 make inference_lib_dist
-pip install -U python/dist/*.whl  #还是在build文件夹
+pip3 install python/dist/*.whl  #还是在build文件夹
 ```
 
 ## test demo
 - [Object detection with YOLOv3](https://github.com/PaddlePaddle/Paddle-Inference-Demo/tree/master/python/yolov3)
 - [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR/blob/develop/doc/doc_ch/models_list.md)
 
-## References
+## Reference
 - https://my.oschina.net/u/4375893/blog/4369069
